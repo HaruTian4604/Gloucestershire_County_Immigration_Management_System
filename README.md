@@ -4,7 +4,35 @@
 
 ---
 
-## 1) Project Overview & Problem Statement
+## Project Screenshots
+
+### Dashboard Overview
+![System Dashboard](image/system_dashboard.png)
+*Real-time monitoring and key metrics display*
+
+### Guest Management Interface
+![Guest Management](image/guest_management.png)
+*Complete guest listing and management tools*
+
+### Accommodation Placement System
+![Accommodation Management](image/placement_management.png)
+*Automated accommodation allocation and tracking*
+
+### Detailed Guest Profile
+![Guest Details Page](image/guest_detail_page.png)
+*Comprehensive guest information and history*
+
+### Role-Based Access Control Demonstrations
+| Feature | Description | Screenshot |
+|---------|-------------|------------|
+| Admin-Level Deletion | Administrative users can remove records | ![Admin Delete](image/role-based_admin_delete.png) |
+| Caseworker Permissions | Staff-level restricted deletion capabilities | ![Caseworker Delete](image/role-based_caseworker_delete.png) |
+| User Role Switching | Dynamic role assignment interface | ![User Switching](image/role-based_switch_user.png) |
+| Conflict Detection | Automated conflict alerts and notifications | ![Conflict Alert](image/conflict_notification.png) |
+
+---
+
+### 1) Project Overview & Problem Statement
 **Context.** Under the *Homes for Ukraine* scheme, local authorities must manage sensitive, fast-moving data about **Guests**, **Hosts**, **Accommodations**, and time-bound **Placements**. The initial spreadsheet-based workflow was quick to start but led to fragmentation, manual reconciliations, and compliance risks.
 
 **Problems we solve.**
@@ -27,7 +55,7 @@
 
 ---
 
-## 2) Key Features & Screenshots
+### 2) Key Features & Screenshots
 
 * **Role-based access (token-gated)**
 
@@ -62,7 +90,7 @@
 
 ---
 
-## 3) Technology Stack
+### 3) Technology Stack
 Badges (example):
 
 ![Node](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js\&logoColor=white)
@@ -79,15 +107,15 @@ Badges (example):
 
 ---
 
-## 4) Installation & Local Development
+### 4) Installation & Local Development
 
-### Prerequisites
+#### Prerequisites
 
 * Node.js **18+**
 * MySQL **8+**
 * Git
 
-### Clone & install
+#### Clone & install
 
 ```bash
 git clone https://github.com/<your-username>/GCIMS.git
@@ -95,7 +123,7 @@ cd GCIMS
 npm install
 ```
 
-### Configure environment
+#### Configure environment
 
 Create a `.env` in the project root (example values below):
 
@@ -117,7 +145,7 @@ AUTH_HEADER_NAME=X-Auth-Token
 
 > If your code reads config differently, align names accordingly.
 
-### Initialise the database
+#### Initialise the database
 
 1. Create the database:
 
@@ -131,7 +159,7 @@ CREATE DATABASE refugee_system CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 mysql -u <user> -p refugee_system < refugee_system_structure.sql
 ```
 
-### Run the server
+#### Run the server
 
 ```bash
 npm start
@@ -141,14 +169,14 @@ npm run dev
 
 By default the API listens on `http://localhost:8080/` (configurable via `PORT`).
 
-### Access the app
+#### Access the app
 
 * **Web UI**: open the static pages served by your dev setup (e.g., `index.html`, `guest.html`) pointing requests at `http://localhost:8080/api/...`.
 * **API**: e.g., `GET http://localhost:8080/api/guest/list?keyword=...` (remember to include the token header).
 
 ---
 
-## 5) Project Architecture
+### 5) Project Architecture
 
 > **TODO (system architecture diagram):** `image/diagram/architecture.png`
 
@@ -170,7 +198,7 @@ By default the API listens on `http://localhost:8080/` (configurable via `PORT`)
 
 ---
 
-## 6) Data Model (ER & rules)
+### 6) Data Model (ER & rules)
 
 **Core tables:**
 
@@ -195,7 +223,7 @@ By default the API listens on `http://localhost:8080/` (configurable via `PORT`)
 
 ---
 
-## 7) API Overview (selected)
+### 7) API Overview (selected)
 
 > All `/api/*` endpoints require a token header, e.g. `X-Auth-Token: <token>` (name configurable via `AUTH_HEADER_NAME`).
 
@@ -219,7 +247,7 @@ By default the API listens on `http://localhost:8080/` (configurable via `PORT`)
 
 ---
 
-## 8) Authentication, Authorisation & Audit
+### 8) Authentication, Authorisation & Audit
 
 * **Auth transport:** frontend sends a **token in a header** (default `X-Auth-Token`) with every API call.
 * **Auth check:** backend middleware/guard rejects missing/invalid tokens with `403`.
@@ -231,7 +259,7 @@ By default the API listens on `http://localhost:8080/` (configurable via `PORT`)
 
 ---
 
-## 9) Compliance & Data Protectio
+### 9) Compliance & Data Protectio
 
 * **Data minimisation & purpose limitation:** only fields necessary for placement workflows are stored; notes are optional.
 * **Special category data:** the system is designed to help controllers meet obligations (e.g., lawful basis such as *public task*); actual legal compliance depends on local policy and operating procedures.
@@ -241,7 +269,7 @@ By default the API listens on `http://localhost:8080/` (configurable via `PORT`)
 
 ---
 
-## 10) Roadmap
+### 10) Roadmap
 
 * **Notes 2.0:** structured notes table (author, timestamps) + cross-entity aggregation view on placement detail
 * **Reminders & alerts:** 30-day end-date alerts (email/UI), clickable dashboard drill-downs
@@ -250,7 +278,7 @@ By default the API listens on `http://localhost:8080/` (configurable via `PORT`)
 
 ---
 
-## 11) Known Limitations
+### 11) Known Limitations
 
 * **Delete is soft-delete** via `archived` flag (by design). If you need hard deletes, add explicit admin-only endpoints.
 * **Token model is lightweight.** For third-party integrations or SSO, consider upgrading to JWT/OIDC, HTTPS-only cookies, and refresh-token rotation.
@@ -258,7 +286,7 @@ By default the API listens on `http://localhost:8080/` (configurable via `PORT`)
 
 ---
 
-## 12) Contributing
+### 12) Contributing
 
 Issues and PRs are welcome. Please include:
 
@@ -268,38 +296,7 @@ Issues and PRs are welcome. Please include:
 
 ---
 
-## 13) Project Media
-
-* `image/project_screenshots/landing_or_dashboard.png`
-
-* `image/project_screenshots/guests_list.png`
-
-* `image/project_screenshots/guest_edit_modal.png`
-
-* `image/project_screenshots/host_with_placements.png`
-
-* `image/project_screenshots/notes_field.png`
-
-* `image/project_screenshots/audit_log.png`
-
-* `image/diagram/architecture.png`
-
-* `image/diagram/request_lifecycle_delete_guest.png`
-
-* `image/diagram/data_flow.png`
-
-* `image/diagram/db_er.png`
-
-* `image/diagram/api_matrix.png`
-
-* `image/diagram/rbac.png`
-
-* `image/diagram/privacy_matrix.png`
-
----
-
-
-### Appendix: Quick API call example
+## Appendix: Quick API call example
 
 ```bash
 # List guests (replace TOKEN)
